@@ -1,5 +1,5 @@
-let upper = document.getElementbyID ('letterUpperHalf');
-let lower = document.getElementbyID ('letterLowerHalf');
+let upper = document.getElementbyId('letterUpperHalf');
+let lower = document.getElementbyId('letterLowerHalf');
 
 upper.innerHTML = 'A';
 lower.innerHTML = 'A';
