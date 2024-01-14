@@ -28,7 +28,6 @@ p.halfletter {
     position: relative;
     font-family: 'Roboto Mono', monospace;
     font-size: 125px;
-    color: white;
     margin: 0px;
     font-weight: 400;
     padding: 0px;
@@ -37,8 +36,19 @@ p.halfletter {
 
 p.halfletter.upper {
     top: -10%;
+    /* half letter test */
+    background: linear-gradient(to top, black 50%, white 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 p.halfletter.lower {
     top: -110%;
+    /* half letter test */
+    background: linear-gradient(to bottom, black 50%, white 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
 }
