@@ -36,7 +36,6 @@ p.halfletter {
 
 p.halfletter.upper {
     top: -10%;
-    /* half letter test */
     background: linear-gradient(to top, black 50%, white 50%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -45,7 +44,6 @@ p.halfletter.upper {
 
 p.halfletter.lower {
     top: -110%;
-    /* half letter test */
     background: linear-gradient(to bottom, black 50%, white 50%);
     background-clip: text;
     -webkit-background-clip: text;
