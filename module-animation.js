@@ -8,7 +8,7 @@ const flip = (element, targetLetter) => {
     } 
 }
 const flipNextFrame = () => {
-    let targetChar = 'H'
+    let targetChar = 'Z'
     let upperElement = document.getElementById('letterUpperHalf');
     let lowerElement = document.getElementById('letterLowerHalf');
     if (upperElement.innerHTML === lowerElement.innerHTML) {
@@ -21,9 +21,6 @@ const flipNextFrame = () => {
         flip(upperElement, targetChar);
         flip(lowerElement, targetChar);
     };
-    /* upperElement.style.background = 'linear-gradient(to top, black 55%, white 70%)';
-    upperElement.style.backgroundClip = 'text';
-    */
     if (upperElement.innerHTML !== lowerElement.innerHTML) {
         addGradient(upperElement, lowerElement);
     } else {
@@ -33,14 +30,13 @@ const flipNextFrame = () => {
 
 const addGradient = (element1, element2) => {
     let gradientPoint = Math.floor(Math.random() * 30 + 35);
-    console.log(gradientPoint);
     if (gradientPoint > 50) {
-        element1.style.background = `linear-gradient(to top, black ${gradientPoint}%, grey ${gradientPoint + 5}%, white ${gradientPoint + 10}%)`;
+        element1.style.background = `linear-gradient(to top, black ${gradientPoint}%, grey ${gradientPoint + 5}%, white ${gradientPoint + 15}%)`;
         element1.style.backgroundClip = 'text';
         element2.style.background = `linear-gradient(to bottom, black 50%, white 50%)`;
         element2.style.backgroundClip = 'text';
     } else {
-        element2.style.background = `linear-gradient(to bottom, black ${100-gradientPoint}%, grey ${100-gradientPoint + 5}%, white ${100-gradientPoint + 10}%)`;
+        element2.style.background = `linear-gradient(to bottom, black ${100-gradientPoint}%, grey ${100-gradientPoint + 5}%, white ${100-gradientPoint + 15}%)`;
         element2.style.backgroundClip = 'text';
         element1.style.background = `linear-gradient(to top, black 50%, white 50%)`;
         element1.style.backgroundClip = 'text';
