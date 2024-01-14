@@ -65,10 +65,27 @@ flipv1(targetChar);
 
 /*flipping function v2, flipping one char at once, 
  with possibility of adding pseudo-animation with help of CSS */
-const flipv2 = (element, targetLetter) => {
+const flip = (element, targetLetter) => {
     if (element.innerHTML.charCodeAt(0) < targetLetter.charCodeAt(0)) {
-        console.log('Check');
-    }
+        element.innerHTML = String.fromCharCode(element.innerHTML.charCodeAt(0) + 1);
+    } else if (element.innerHTML.charCodeAt(0) > targetLetter.charCodeAt(0)) {
+        element.innerHTML = String.fromCharCode(element.innerHTML.charCodeAt(0) - 1);
+    } 
+}
+const flipNextFrames = () => {
+    let targetChar = 'H'
+        upperElement = document.getElementById('letterUpperHalf');
+        lowerElement = document.getElementById('letterLowerHalf');
+        if (upperElement.innerHTML === lowerElement.innerHTML) {
+            if (upperElement.innerHTML.charCodeAt(0) < targetChar.charCodeAt(0)) {
+                flip(lowerElement, targetChar);
+            } else if (upperElement.innerHTML.charCodeAt(0) > targetChar.charCodeAt(0)) {
+                flip(upperElement, targetChar);
+            }
+        } else {
+            flip(upperElement, targetChar);
+            flip(lowerElement, targetChar);
+        }
 }
 
-flipv2(document.getElementById('letterUpperHalf'), 'z');
+document.getElementById('nextFrame').addEventListener('click',flipNextFrames);
