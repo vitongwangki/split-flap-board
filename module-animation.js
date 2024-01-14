@@ -8,33 +8,39 @@ const flip = (element, targetLetter) => {
     } 
 }
 const flipNextFrame = () => {
-    let targetChar = 'A'
+    let targetChar = 'C'
     let upperElement = document.getElementById('letterUpperHalf');
     let lowerElement = document.getElementById('letterLowerHalf');
     if (upperElement.innerHTML === lowerElement.innerHTML) {
+        // Decide which element should flip first
         if (upperElement.innerHTML.charCodeAt(0) < targetChar.charCodeAt(0)) {
             flip(lowerElement, targetChar);
         } else if (upperElement.innerHTML.charCodeAt(0) > targetChar.charCodeAt(0)) {
             flip(upperElement, targetChar);
         }
-    } else if (Math.floor(Math.random() * 10) > 2){
+    } else if (Math.floor(Math.random() * 10) > 4){
+        // flipping both elements at the same time for 60% chance
         flip(upperElement, targetChar);
         flip(lowerElement, targetChar);
-    } else {
-        if (upperElement.innerHTML.charCodeAt(0) < targetChar.charCodeAt(0)) {
-            flip(upperElement, targetChar);
-        } else if (upperElement.innerHTML.charCodeAt(0) > targetChar.charCodeAt(0)) {
-            flip(lowerElement, targetChar);
+    } else { 
+        // flipping the lagged element to show intermediate character for 40% chance
+        if (Math.abs(upperElement.innerHTML.charCodeAt(0) - targetChar.charCodeAt(0)) > Math.abs(lowerElement.innerHTML.charCodeAt(0) - targetChar.charCodeAt(0))) {
+            flip(upperElement,targetChar);
+        } else {
+            flip(lowerElement,targetChar);
+        };
         }
-    }
     if (upperElement.innerHTML !== lowerElement.innerHTML) {
+        // add gradient on display when not showing the whole character
         addGradient(upperElement, lowerElement);
     } else {
+        // remove gradient on display when showing whole character
         removeGradient (upperElement, lowerElement);
     };
 }
 
 const addGradient = (element1, element2) => {
+    // restricting gradient starts from 30% to 70%
     let gradientPoint = Math.floor(Math.random() * 40 + 30);
     if (gradientPoint > 50) {
         element1.style.background = `linear-gradient(to top, black ${gradientPoint}%, grey ${gradientPoint + 3}%, white ${gradientPoint + 5}%)`;
@@ -59,8 +65,8 @@ const removeGradient = (element1, element2) => {
 const resetFrame = () => {
     let upperElement = document.getElementById('letterUpperHalf');
     let lowerElement = document.getElementById('letterLowerHalf');
-    upperElement.innerHTML = 'Z';
-    lowerElement.innerHTML = 'Z';
+    upperElement.innerHTML = 'A';
+    lowerElement.innerHTML = 'A';
 }
 
 document.getElementById('nextFrame').addEventListener('click',flipNextFrame);
