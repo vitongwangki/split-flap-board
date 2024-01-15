@@ -1,6 +1,6 @@
 /*flipping function v2, flipping one char at once, 
  with possibility of adding pseudo-animation with help of CSS */
-const flip = (element, targetLetter) => {
+ const flip = (element, targetLetter) => {
     if (element.innerHTML.charCodeAt(0) < targetLetter.charCodeAt(0)) {
         element.innerHTML = String.fromCharCode(element.innerHTML.charCodeAt(0) + 1);
     } else if (element.innerHTML.charCodeAt(0) > targetLetter.charCodeAt(0)) {
@@ -84,4 +84,3 @@ async function flipDelayLoop() {
 document.getElementById('nextFrame').addEventListener('click',flipNextFrame);
 document.getElementById('resetFrame').addEventListener('click',resetFrame);
 document.getElementById('startLoop').addEventListener('click',flipDelayLoop);
-
