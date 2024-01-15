@@ -8,7 +8,7 @@ const flip = (element, targetLetter) => {
     } 
 }
 const flipNextFrame = () => {
-    let targetChar = 'C'
+    let targetChar = 'Z'
     let upperElement = document.getElementById('letterUpperHalf');
     let lowerElement = document.getElementById('letterLowerHalf');
     if (upperElement.innerHTML === lowerElement.innerHTML) {
@@ -69,7 +69,18 @@ const resetFrame = () => {
     lowerElement.innerHTML = 'A';
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function flipDelayLoop() {
+    for (let i = 0; i < 40; i++) {
+        flipNextFrame();
+        await sleep(50); // sleep for 0.1s
+    }
+}
+
 document.getElementById('nextFrame').addEventListener('click',flipNextFrame);
 document.getElementById('resetFrame').addEventListener('click',resetFrame);
-document.addEventListener('keydown', flipNextFrame);
+document.getElementById('startLoop').addEventListener('click',flipDelayLoop);
 
