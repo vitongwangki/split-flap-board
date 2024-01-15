@@ -1,16 +1,19 @@
 /*flipping function v2, flipping one char at once, 
  with possibility of adding pseudo-animation with help of CSS */
- const flip = (element, targetLetter) => {
+
+
+const flip = (element, targetLetter) => {
     if (element.innerHTML.charCodeAt(0) < targetLetter.charCodeAt(0)) {
         element.innerHTML = String.fromCharCode(element.innerHTML.charCodeAt(0) + 1);
     } else if (element.innerHTML.charCodeAt(0) > targetLetter.charCodeAt(0)) {
         element.innerHTML = String.fromCharCode(element.innerHTML.charCodeAt(0) - 1);
     } 
 }
-const flipNextFrame = () => {
-    let targetChar = 'Z'
-    let upperElement = document.getElementById('letterUpperHalf');
-    let lowerElement = document.getElementById('letterLowerHalf');
+
+const flipNextFramev2 = (flipNum) => {
+    let targetChar = targetDest[flipNum];
+    let upperElement = document.getElementsByClassName('charBox')[flipNum].children[0].children[0];
+    let lowerElement = document.getElementsByClassName('charBox')[flipNum].children[1].children[0];
     if (upperElement.innerHTML === lowerElement.innerHTML) {
         // Decide which element should flip first
         if (upperElement.innerHTML.charCodeAt(0) < targetChar.charCodeAt(0)) {
@@ -62,12 +65,17 @@ const removeGradient = (element1, element2) => {
     element2.style.backgroundClip = 'text';
 }
 
-const resetFrame = () => {
-    let upperElement = document.getElementById('letterUpperHalf');
-    let lowerElement = document.getElementById('letterLowerHalf');
-    upperElement.innerHTML = 'A';
-    lowerElement.innerHTML = 'A';
+const resetFramev2 = (flipNum) => {
+    let upperElement = document.getElementsByClassName('charBox')[flipNum].children[0].children[0];
+    let lowerElement = document.getElementsByClassName('charBox')[flipNum].children[1].children[0];
+    upperElement.innerHTML = originalDest[flipNum];
+    lowerElement.innerHTML = originalDest[flipNum];
     removeGradient(upperElement, lowerElement);
+}
+const resetRow = () => {
+    for (let flipBoxNum = 0; flipBoxNum < 3; flipBoxNum ++) {
+        resetFramev2(flipBoxNum);
+    }
 }
 
 function sleep(ms) {
@@ -76,11 +84,30 @@ function sleep(ms) {
 
 async function flipDelayLoop() {
     for (let i = 0; i < 40; i++) {
-        flipNextFrame();
+        checkFlip();
         await sleep(50); // sleep for 0.05s
     }
 }
+const checkFlip = () => {
+    for (let flipBoxNum = 0; flipBoxNum < 3; flipBoxNum ++) {
+        flipNextFramev2(flipBoxNum);
+    } 
+}
 
-document.getElementById('nextFrame').addEventListener('click',flipNextFrame);
-document.getElementById('resetFrame').addEventListener('click',resetFrame);
+
+let originalDest = 'KIX';
+let dest = 'YVR';
+let targetDest = dest.split('');
+let letterBox = document.getElementsByClassName('charBox');
+let currentDest = [];
+for (let i=0;i<3;i++) {
+    currentDest.push(letterBox[i].children[0].children[0].innerHTML);
+} ;
+console.log(targetDest);
+console.log(currentDest);
+document.getElementById('nextFrame').addEventListener('click', checkFlip);
+document.getElementById('resetFrame').addEventListener('click', resetRow);
 document.getElementById('startLoop').addEventListener('click',flipDelayLoop);
+
+
+
