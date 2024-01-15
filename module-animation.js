@@ -76,7 +76,7 @@ function sleep(ms) {
 async function flipDelayLoop() {
     for (let i = 0; i < 40; i++) {
         flipNextFrame();
-        await sleep(50); // sleep for 0.1s
+        await sleep(50); // sleep for 0.05s
     }
 }
 
