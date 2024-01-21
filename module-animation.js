@@ -1,5 +1,8 @@
 /*flipping function v2, flipping one char at once, 
  with possibility of adding pseudo-animation with help of CSS */
+import {charList} from "./charlist.js";
+charList.forEach(char => {console.log(char)});
+
 const flip = (element, targetLetter) => {
     if (element.innerHTML.charCodeAt(0) < targetLetter.charCodeAt(0)) {
         element.innerHTML = String.fromCharCode(element.innerHTML.charCodeAt(0) + 1);
