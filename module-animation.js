@@ -1,7 +1,32 @@
 /*flipping function v2, flipping one char at once, 
  with possibility of adding pseudo-animation with help of CSS */
-import {charList} from "./charlist.js";
-charList.forEach(char => {console.log(char)});
+
+// defining charList
+const charList = 
+[
+    ' ' , 
+    '!' , 
+    '#', 
+    '%', 
+    '&', 
+    '(', 
+    ')', 
+    '*', 
+    '+', 
+    '-', 
+    '/', 
+    ',', 
+    '.', 
+    '0', 
+    '1', 
+    '2', 
+    '3', 
+    '4', 
+    '5', 
+    '6'
+];
+
+charList.forEach(function (char) { console.log(char); });
 
 const flip = (element, targetLetter) => {
     if (element.innerHTML.charCodeAt(0) < targetLetter.charCodeAt(0)) {
