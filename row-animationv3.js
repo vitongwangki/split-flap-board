@@ -60,9 +60,10 @@ const charList =
     '^',
     '~',
 ];
-
-const originalDest = ['Z', 'R', 'H'];
-const targetDest = ['D', 'X', 'B'];
+const original = "HONG KONG   ";
+const originalDest = original.split('');
+const target = "DUBAI (DXB) ";
+const targetDest = target.split('');
 const targetDestCode = targetDest.map((char) => {
     return charList.indexOf(char);
 });
@@ -166,13 +167,13 @@ async function flipDelayLoop() {
 }
 
 const checkFlip = () => {
-    for (let flipBoxNum = 0; flipBoxNum < 3; flipBoxNum ++) {
+    for (let flipBoxNum = 0; flipBoxNum < 12; flipBoxNum ++) {
         flipFramev2(flipBoxNum);
     } 
 }
 
 const resetRow = () => {
-    for (let flipBoxNum = 0; flipBoxNum < 3; flipBoxNum ++) {
+    for (let flipBoxNum = 0; flipBoxNum < 12; flipBoxNum ++) {
         resetFramev2(flipBoxNum);
     }
 }
