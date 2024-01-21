@@ -72,8 +72,7 @@ const currentUpperCode = originalDest.map((char) => {
 const currentLowerCode = originalDest.map((char) => {
     return charList.indexOf(char);
 });
-console.log(currentUpperCode);
-console.log(currentLowerCode);
+
 
 //Reset or initialize function
 const resetFramev2 = (moduleId) => {
@@ -134,8 +133,6 @@ const removeGradient = (element1, element2) => {
 const flipFramev2 = (moduleId) => {
     let upperElement = document.getElementsByClassName('charBox')[moduleId].children[0].children[0];
     let lowerElement = document.getElementsByClassName('charBox')[moduleId].children[1].children[0];
-    console.log(currentUpperCode[moduleId]);
-    console.log(currentLowerCode[moduleId]);
     if (currentUpperCode[moduleId] !== targetDestCode[moduleId] || currentLowerCode[moduleId] !== targetDestCode[moduleId]) {   
         if (currentUpperCode[moduleId] !== targetDestCode[moduleId] && currentLowerCode[moduleId] !== targetDestCode[moduleId]) {
             if (upperElement.innerHTML === lowerElement.innerHTML) {
@@ -162,12 +159,24 @@ function sleep(ms) {
 }
 
 async function flipDelayLoop() {
-    while (currentLowerCode[0] !== targetDestCode[0]) {
-        flipFramev2(0);
+    while (JSON.stringify(currentLowerCode) !== JSON.stringify(targetDestCode)) {
+        checkFlip();
         await sleep(50); // sleep for 0.05s
     }
 }
 
+const checkFlip = () => {
+    for (let flipBoxNum = 0; flipBoxNum < 3; flipBoxNum ++) {
+        flipFramev2(flipBoxNum);
+    } 
+}
+
+const resetRow = () => {
+    for (let flipBoxNum = 0; flipBoxNum < 3; flipBoxNum ++) {
+        resetFramev2(flipBoxNum);
+    }
+}
+
 document.getElementById('nextFrame').addEventListener('click',function () {flipFramev2(0)});
-document.getElementById('resetFrame').addEventListener('click',function() {resetFramev2(0)});
+document.getElementById('resetFrame').addEventListener('click',function() {resetRow(0)});
 document.getElementById('startLoop').addEventListener('click',flipDelayLoop);
